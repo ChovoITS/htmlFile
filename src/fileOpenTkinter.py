@@ -1,5 +1,6 @@
 import tkinter.filedialog
 
+#Funzione per ricavare il path di un file grazie a Tkinter
 def importFile(fileType : str, fileOpenType : str, writeText=""):
     if fileType != "html" and fileType != "txt":
         raise TypeError("Devi inserire come tipo di file 'html' o 'txt'")
@@ -8,6 +9,7 @@ def importFile(fileType : str, fileOpenType : str, writeText=""):
     pathFile = tkinter.filedialog.askopenfilename(title=f"Chose {fileType.upper()} file", filetypes=[(f"{fileType.upper()} files", f"*.{fileType.lower()}")])
     return openFile(pathFile, fileOpenType, writeText)
 
+#Funzione per scrivere o leggere un file in modo dinamico
 def openFile(pathFile : str, fileOpenType : str, writeText=""):
     if fileOpenType != "r" and fileOpenType != "w":
         raise TypeError("Devi inserire come apertura del file 'r' o 'w'")
