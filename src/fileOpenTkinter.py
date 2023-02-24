@@ -27,4 +27,5 @@ def openFile(pathFile : str, fileOpenType : str, writeText=""):
         else:
             f = open(pathFile, fileOpenType, encoding="utf-8", errors="ignore")
             f.write(writeText)
+            f.close()
             return
