@@ -1,3 +1,5 @@
+import asyncio
 import searchKeyword
 
-searchKeyword.htmlFileGenerator(["class=", "<img", "href="])
+asyncio.run(searchKeyword.htmlURLGeneratorList(
+    ["https://www.repubblica.it", "https://www.corriere.it"], ["class=", "img", "<a"]))

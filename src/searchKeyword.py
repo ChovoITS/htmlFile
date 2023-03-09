@@ -1,4 +1,6 @@
 import fileOpenTkinter
+import asyncio
+import urllib.request
 
 # Estrarre il body del file HTMl per togliere tutte le informazioni inutili
 def extractBody(lines: list):
@@ -32,3 +34,18 @@ def htmlFileGenerator(keyword : str):
     text = ""
     text = textGenerator(keyword, countKeywords(bodyHtml, keyword), text)
     fileOpenTkinter.importFile("txt", "w", text)
+
+async def htmlURLGenerator(url : str, keywords):
+    req = urllib.request.urlopen(url)
+    html = req.read().decode(req.headers.get_content_charset())
+    text = ""
+    if type(keywords) == list:
+        for keyword in keywords:
+            text = textGenerator(keyword, html.count(keyword), text)
+    else:
+        text = textGenerator(keywords, html.count(keywords), text)
+    fileOpenTkinter.importFile("txt", "w", text)
+
+async def htmlURLGeneratorList(urls : list, keywords):
+    tasks = [asyncio.create_task(htmlURLGenerator(url, keywords))for url in urls]
+    result = asyncio.gather(*tasks)
